@@ -122,6 +122,7 @@ def xarray_open_dataset(
     if reference:
         xr_open_args["consolidated"] = False
         xr_open_args["backend_kwargs"] = {"consolidated": False}
+    xr_open_args["consolidated"] = False
     ds = xarray.open_dataset(file_handler, **xr_open_args)
     if api_settings.enable_cache:
         # Serialize the dataset to bytes using pickle
