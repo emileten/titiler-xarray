@@ -97,6 +97,7 @@ def ping():
 
 
 if api_settings.enable_cache:
+
     from titiler.xarray.redis_pool import get_redis
 
     @app.get("/clear_cache")

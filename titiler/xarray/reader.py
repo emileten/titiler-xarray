@@ -16,6 +16,7 @@ from rio_tiler.constants import WEB_MERCATOR_TMS, WGS84_CRS
 from rio_tiler.io.xarray import XarrayReader
 from rio_tiler.types import BBox
 
+from titiler.xarray.redis_pool import get_redis
 from titiler.xarray.settings import ApiSettings
 
 api_settings = ApiSettings()
@@ -88,8 +89,6 @@ def xarray_open_dataset(
     """Open dataset."""
     # Generate cache key and attempt to fetch the dataset from cache
     if api_settings.enable_cache:
-        from titiler.xarray.redis_pool import get_redis
-
         cache_client = get_redis()
         cache_key = f"{src_path}_{group}" if group is not None else src_path
         data_bytes = cache_client.get(cache_key)
