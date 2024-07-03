@@ -16,6 +16,9 @@ COPY titiler/ titiler/
 # we have to force using old package version that seems `almost` compatible with Lambda env botocore
 # https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
 RUN pip install --upgrade pip
+
+RUN yum install gcc-c++ -y
+
 RUN pip install . "mangum>=0.10.0" "botocore==1.29.76" "aiobotocore==2.5.0" -t /asset --no-binary pydantic
 
 # Reduce package size and remove useless files
@@ -31,6 +34,8 @@ RUN find /asset -type f -path '*README*' -delete
 RUN find /asset -type f -path '*AUTHORS*' -delete
 RUN find /asset -type f -path '*pyproject*' -delete
 RUN find /asset -type f -path '*setupcf*' -delete
+
+RUN yum remove gcc-c++ -y
 
 COPY infrastructure/aws/lambda/handler.py /asset/handler.py
 
