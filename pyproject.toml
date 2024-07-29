@@ -40,6 +40,7 @@ dependencies = [
     "titiler.core==0.14.1",
     "pydantic-settings==2.0.3",
     "pandas==1.5.3",
+    "numpy==1.26.4",
     "fastapi==0.106.0",
     "starlette==0.27.0",
 ]
